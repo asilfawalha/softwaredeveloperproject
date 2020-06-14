@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Waiting list {% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>This page will contain the waiting list.</h1>
+</div>
+<div>
+  <table border=1>
+    <tr>
+      <th>crn</th>
+      <th>sub</th>
+      <th>crse</th>
+      <th>section</th>
+      <th>title</th>
+      <th>days</th>
+      <th>time</th>
+      <th>instructor</th>
+      <th>type</th>
+      <th>seats</th>
+      <th>enrolled</th>
+    </tr>
+    {% for sched in wlist: %}
+    <tr>
+      <td>{{sched[0]}}</td>
+      <td>{{sched[1]}}</td>
+      <td>{{sched[2]}}</td>
+      <td>{{sched[3]}}</td>
+      <td>{{sched[4]}}</td>
+      <td>{{sched[5]}}</td>
+      <td>{{sched[6]}}</td>
+      <td>{{sched[7]}}</td>
+      <td>{{sched[8]}}</td>
+      <td>{{sched[9]}}</td>
+      <td>{{sched[10]}}</td>
+    </tr>
+      {%endfor%}
+
+  </table>
+</div>
+<hr>
+<div>
+  <h1>remove courses from waiting list</h1>
+  {{ wtf.quick_form(rforms) }}
+</div>
+{% endblock %}

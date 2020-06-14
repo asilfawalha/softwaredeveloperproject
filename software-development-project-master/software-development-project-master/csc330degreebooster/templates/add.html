@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Add  courses {% endblock %}
+
+{% block page_content %}
+<div>
+  {{ wtf.quick_form(bforms) }}
+  <table border=1>
+    <tr>
+      <th>crn</th>
+      <th>sub</th>
+      <th>crse</th>
+      <th>section</th>
+      <th>title</th>
+      <th>days</th>
+      <th>time</th>
+      <th>instructor</th>
+      <th>type</th>
+      <th>seats</th>
+      <th>enrolled</th>
+    </tr>
+    {% for sched in schlist: %}
+      <tr>
+        <td>{{sched[0]}}</td>
+        <td>{{sched[1]}}</td>
+        <td>{{sched[2]}}</td>
+        <td>{{sched[3]}}</td>
+        <td>{{sched[4]}}</td>
+        <td>{{sched[5]}}</td>
+        <td>{{sched[6]}}</td>
+        <td>{{sched[7]}}</td>
+        <td>{{sched[8]}}</td>
+        <td>{{sched[9]}}</td>
+        <td>{{sched[10]}}</td>
+      </tr>
+      {%endfor%}
+
+  </table>
+</div>
+<br>
+<hr>
+<div><!-- Displays flash message if it is true-->
+        {% with message = get_flashed_messages() %}
+            {% if message %}
+                <h2>{{ message }}</h2>
+            {% endif %}
+        {%endwith%}
+</div>
+
+<div class="page-header">
+    <h1>This page will give you the options to add a course from the waiting list for the semester.</h1>
+</div>
+<div>
+  {{ wtf.quick_form(aforms) }}
+</div>
+{% endblock %}

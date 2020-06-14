@@ -1,0 +1,96 @@
+http://34.69.136.44:8080
+
+to try our sofware, try to copy this link in above : i run it via no hub. i try it in the train and it is working.
+however , if it is not working . please Email : waiyat.hamdani@gmail.com or call:203-492-9688.
+
+anyway happy holiday.
+
+
+respondsibility:
+
+   sprint 1
+    Ortega:login edited by
+    Kenn: sign up edited by
+    waiyat: attaching database to login ,attaching database to signup
+            ,transfering excell data into database
+    kevin: login database creating table
+    asil: create table for a whole database except login
+    ----------------------------------------------------------------------------------------
+    sprint 2
+    waiyat:oversees database,add page, remove page , waiting List
+    Ortega : working with waiyat in the waiting list
+    aseel: add course page in the faculty
+    kevin : Notification
+    kenn : doing Nothing
+    -----------------------------------------------------------------------------------------
+    sprint3
+    waiyat:removing remove page and add them in waiting list, fixing notivication with kevin,
+            fixing the adding couses more simple, working with aseel on the waiting list,
+    Ortega : providing back up and idea on the adding page
+    aseel: fixing course page in the faculty, working with waiyat to add waiting_list
+            , working with waiyat adding admin page
+    kevin :fixing Notification with waiyat, editing the documentation
+    kenn : doing Nothing
+
+
+database design:
+CREATE TABLE student (idStudent INT,FirstName VARCHAR(40),LastName VARCHAR(40), Email VARCHAR(100),Username VARCHAR(100),Password VARCHAR(100),Major VARCHAR(40),fullpartTime VARCHAR(40),PRIMARY KEY(idStudent));
+
+CREATE TABLE faculty (idFaculty INT,FirstName VARCHAR(40),LastName VARCHAR(40),Email VARCHAR(40),crn INT,PRIMARY KEY(idFaculty,crn)); 
+
+
+CREATE TABLE Enrolled (idStudent INT,crn INT,idFaculty INT,PRIMARY KEY (idStudent),FOREIGN KEY(idStudent) REFERENCES student(Idstudent),sub varchar(40),instructor varchar(40),time varchar(40),FOREIGN KEY(idFaculty) REFERENCES faculty(idFaculty));
+
+
+CREATE TABLE waitList (idStudent INT,crn INT,sub varchar(40),instructor varchar(40),Email VARCHAR (40),FOREIGN KEY(idStudent) REFERENCES student(idStudent));
+
+
+CREATE TABLE schedule (crn INT,sub VARCHAR(40),crse INT,Section varchar(40),title VARCHAR(40),days VARCHAR(40),time varchar(40),instructor VARCHAR (40),type VARCHAR (40),seats INT,enrolled INT);
+
+
+---------------------------------------------------------------openpyexcel for unloading data to schedule--------------------------------------------------------------------------------------------
+pyandexcel.py
+
+
+from openpyxl import load_workbook
+wb= load_workbook("schedule.xlsx")
+#print(wb.sheetnames) '''this is to see the sheetname in the excel file'''
+
+'''
+sheet= wb['Schedule']
+cells=sheet['A1']
+print(cells.value)
+'''
+#this is for grabbing the value from the excel
+sheet=wb['Schedule']
+no=1
+for i in range(2625):
+    no+=1
+    a="A"+str(no)
+    mya=sheet[a].value
+    b="B"+str(no)
+    myb=sheet[b].value
+    c="C"+str(no)
+    myc=sheet[c].value
+    d="D"+str(no)
+    myd=sheet[d].value
+    e="E"+str(no)
+    mye=sheet[e].value
+    f="F"+str(no)
+    myf=sheet[f].value
+    g="G"+str(no)
+    myg=sheet[g].value
+    h="H"+str(no)
+    myh=sheet[h].value
+    i="I"+str(no)
+    myi=sheet[i].value
+    j="J"+str(no)
+    myj=sheet[j].value
+    k="K"+str(no)
+    myk=sheet[k].value
+    result= "insert into schedule values({},{},{},{},{},{},{},{},{},{},{});".format(mya,myb,myc,myd,mye,myf,myg,myh,myi,myj,myk)
+    print(result)
+
+
+CREATE TABLE login(UserName VARCHAR(100), Password VARCHAR(100), Role VARCHAR(40),FirstName VARCHAR(100), LastName VARCHAR(100), Type VARCHAR(8), Email VARCHAR(40),idStudent INT);
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
